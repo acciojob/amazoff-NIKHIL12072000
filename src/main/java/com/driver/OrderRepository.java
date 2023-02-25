@@ -52,7 +52,7 @@ public class OrderRepository {
     }
 
     public int findOrderCountByPartnerId(String partnerId) {
-        return orderPartnerMap.get(partnerId).size();
+        return orderPartnerMap.containsKey(partnerId)?orderPartnerMap.get(partnerId).size():0;
     }
 
     public List<String> findOrdersByPartnerId(String partnerId) {
