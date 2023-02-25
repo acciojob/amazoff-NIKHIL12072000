@@ -46,7 +46,7 @@ public class OrderController {
 
         Order order= null;
         //order should be returned with an orderId.
-        orderService.findOrderById(orderId);
+        order=orderService.findOrderById(orderId);
         return new ResponseEntity<>(order, HttpStatus.CREATED);
     }
 
@@ -56,7 +56,7 @@ public class OrderController {
         DeliveryPartner deliveryPartner = null;
 
         //deliveryPartner should contain the value given by partnerId
-        orderService.findPartnerById(partnerId);
+        deliveryPartner=orderService.findPartnerById(partnerId);
         return new ResponseEntity<>(deliveryPartner, HttpStatus.CREATED);
     }
 
@@ -66,7 +66,7 @@ public class OrderController {
         Integer orderCount = 0;
 
         //orderCount should denote the orders given by a partner-id
-        orderService.findOrderCountByPartnerId(partnerId);
+        orderCount=orderService.findOrderCountByPartnerId(partnerId);
         return new ResponseEntity<>(orderCount, HttpStatus.CREATED);
     }
 
@@ -75,14 +75,14 @@ public class OrderController {
         List<String> orders = null;
 
         //orders should contain a list of orders by PartnerId
-        orderService.findOrdersByPartnerId(partnerId);
+        orders=orderService.findOrdersByPartnerId(partnerId);
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-orders")
     public ResponseEntity<List<String>> getAllOrders(){
         List<String> orders = null;
-        orderService.findAllOrders();
+        orders=orderService.findAllOrders();
         //Get all orders
         return new ResponseEntity<>(orders, HttpStatus.CREATED);
     }
@@ -92,7 +92,7 @@ public class OrderController {
         Integer countOfOrders = 0;
 
         //Count of orders that have not been assigned to any DeliveryPartner
-        orderService.findCountOfUnassignedOrders();
+        countOfOrders=orderService.findCountOfUnassignedOrders();
         return new ResponseEntity<>(countOfOrders, HttpStatus.CREATED);
     }
 
@@ -102,7 +102,7 @@ public class OrderController {
         Integer countOfOrders = 0;
 
         //countOfOrders that are left after a particular time of a DeliveryPartner
-        orderService.findOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
+        countOfOrders=orderService.findOrdersLeftAfterGivenTimeByPartnerId(time,partnerId);
         return new ResponseEntity<>(countOfOrders, HttpStatus.CREATED);
     }
 
@@ -111,7 +111,7 @@ public class OrderController {
         String time = null;
 
         //Return the time when that partnerId will deliver his last delivery order.
-        orderService.findLastDeliveryTimeByPartnerId(partnerId);
+        time=orderService.findLastDeliveryTimeByPartnerId(partnerId);
         return new ResponseEntity<>(time, HttpStatus.CREATED);
     }
 

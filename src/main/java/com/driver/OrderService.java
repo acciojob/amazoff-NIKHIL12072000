@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class OrderService {
+
+    OrderService(){}
     @Autowired
     OrderRepository orderRepository;
 
@@ -33,11 +35,11 @@ public class OrderService {
         return orderRepository.findOrderCountByPartnerId(partnerId);
     }
 
-    public List<Order> findOrdersByPartnerId(String partnerId) {
+    public List<String> findOrdersByPartnerId(String partnerId) {
         return orderRepository.findOrdersByPartnerId(partnerId);
     }
 
-    public List<Order> findAllOrders() {
+    public List<String> findAllOrders() {
         return orderRepository.findAllOrders();
     }
 
