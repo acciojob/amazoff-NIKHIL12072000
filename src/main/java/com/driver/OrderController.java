@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("orders")
+
 public class OrderController {
 
     @Autowired
@@ -62,7 +63,7 @@ public class OrderController {
 
     @GetMapping("/get-order-count-by-partner-id/{partnerId}")
     public ResponseEntity<Integer> getOrderCountByPartnerId(@PathVariable String partnerId){
-        Integer orderCount = 0;
+        Integer orderCount;
         //orderCount should denote the orders given by a partner-id
         orderCount=orderService.findOrderCountByPartnerId(partnerId);
         return new ResponseEntity<>(orderCount, HttpStatus.CREATED);
