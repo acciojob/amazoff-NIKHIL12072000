@@ -4,6 +4,7 @@ public class DeliveryPartner {
 
     private String id;
     private int numberOfOrders;
+    DeliveryPartner(){}
 
     public DeliveryPartner(String id) {
         this.id = id;
