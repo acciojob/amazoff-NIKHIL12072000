@@ -68,7 +68,9 @@ public class OrderRepository {
     }
 
     public int findOrdersLeftAfterGivenTimeByPartnerId(String time, String partnerId) {
-        int t=Integer.parseInt(time),count=0;
+        String[] times=time.split(":");
+        int t=Integer.parseInt(times[0])*60+Integer.parseInt(times[1]);
+        int count=0;
         for(Order order:orderPartnerMap.get(partnerId)){
             if(order.getDeliveryTime()>t) count++;
         }
@@ -76,11 +78,12 @@ public class OrderRepository {
     }
 
     public String findLastDeliveryTimeByPartnerId(String partnerId) {
-        int last=Integer.MIN_VALUE;
+        int last=0;
         for(Order order:orderPartnerMap.get(partnerId)){
             last=Math.max(last,order.getDeliveryTime());
         }
-        return ""+last;
+        String time=(last/60)+":"+(last%60);
+        return time;
     }
 
     public void removePartnerById(String partnerId) {
