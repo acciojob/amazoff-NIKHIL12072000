@@ -9,10 +9,10 @@ import java.util.List;
 @Repository
 public class OrderRepository {
 
-    private HashMap<String,Order> orderMap;
+    private HashMap<String,Order> orderMap; //assigned orders
     private HashMap<String,DeliveryPartner> deliveryPartnerMap;
 
-    private HashMap<String,String> orderPartnerPairMap;
+    private HashMap<String,String> orderPartnerPairMap; //only assigned orders
     private HashMap<String, List<Order>> orderPartnerMap;
 
     OrderRepository(){
@@ -34,13 +34,15 @@ public class OrderRepository {
     }
 
     public void saveOrderPartnerPair(String orderId, String partnerId) {
-        if(partnerId.equals(null)||partnerId.trim().equals("")) partnerId="nopartner";
-        List<Order> update=orderPartnerMap.get(partnerId);
-        update.add(orderMap.get(orderId));
-        orderPartnerMap.put(partnerId,update);
-        int x=deliveryPartnerMap.get(partnerId).getNumberOfOrders();
-        deliveryPartnerMap.get(partnerId).setNumberOfOrders(x+1);
-        orderPartnerPairMap.put(orderId,partnerId);
+        if(orderMap.containsKey(orderId) && deliveryPartnerMap.containsKey(partnerId)) {
+            if (partnerId.equals(null) || partnerId.trim().equals("")) partnerId = "nopartner";
+            List<Order> update=orderPartnerMap.get(partnerId);
+            update.add(orderMap.get(orderId));
+            orderPartnerMap.put(partnerId,update);
+            int x=deliveryPartnerMap.get(partnerId).getNumberOfOrders();
+            deliveryPartnerMap.get(partnerId).setNumberOfOrders(x+1);
+            orderPartnerPairMap.put(orderId,partnerId);
+        }
     }
 
     public Order findOrderById(String orderId) {
